@@ -6,16 +6,23 @@ logging:
         type:
           descriptor:
             sql: debug
+    com:
+      bloomgroom: debug  # 추가된 로그 레벨
 
 # console 색상
 spring:
+  # 외부 설정 파일 import
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - optional:file:classpath:database/application-database.yml
+      - optional:file:classpath:oauth2/application-oauth2.yml
   output:
     ansi:
       enabled: always
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
 
 # 오류 처리
 server:
