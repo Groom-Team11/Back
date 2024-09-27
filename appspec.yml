@@ -1,17 +1,18 @@
 version: 0.0
 os: linux
 files:
-  - source: build/libs/your-application.jar
-    destination: /home/ubuntu/app/
+  - source:  /
+    destination: /home/ubuntu/github_action
     overwrite: yes
 
-hooks:
-  BeforeInstall:
-    - location: scripts/stop.sh
-      timeout: 60
-      runas: ubuntu
-  AfterInstall:
-    - location: scripts/start.sh
-      timeout: 60
-      runas: ubuntu
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
 
+hooks:
+  ApplicationStart:
+    - location: scripts/gh_deploy.sh
+      timeout: 60
+      runas: ubuntu
