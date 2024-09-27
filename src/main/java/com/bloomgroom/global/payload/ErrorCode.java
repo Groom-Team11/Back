@@ -18,7 +18,10 @@ public enum ErrorCode {
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "E1", "올바르지 않은 입력값입니다."),
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "E2", "잘못된 HTTP 메서드를 호출했습니다."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E3", "서버 에러가 발생했습니다."),
-    NOT_FOUND(HttpStatus.NOT_FOUND, "E4", "존재하지 않는 엔티티입니다.");
+    NOT_FOUND(HttpStatus.NOT_FOUND, "E4", "존재하지 않는 엔티티입니다."),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "E5", "사용자를 찾을 수 없습니다."),
+    VERY_IMPORTANT_GOAL_EXISTS(HttpStatus.BAD_REQUEST, "E6", "해당 사용자는 이미 '매우중요' 목표를 가지고 있습니다."),
+    IMPORTANT_GOAL_EXISTS(HttpStatus.BAD_REQUEST, "E7", "해당 사용자는 이미 '중요' 목표를 가지고 있습니다.");
 
 
     private final String message;
