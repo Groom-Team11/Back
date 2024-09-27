@@ -42,7 +42,7 @@ public class SmallGoalController {
     }
 
     // 날짜로 조회
-    @PostMapping("/list/{bigGoalId}")
+    @PostMapping("/date-list/{bigGoalId}")
     public ResponseEntity<ApiResponse> getSmallGoalsByDate(@PathVariable Long bigGoalId, @RequestBody SmallGoalDateReq request) {
         return smallGoalService.getSmallGoalsByDate(bigGoalId, request.getSmallGoalDate());
     }
