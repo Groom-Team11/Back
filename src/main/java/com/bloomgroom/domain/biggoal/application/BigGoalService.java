@@ -6,6 +6,8 @@ import com.bloomgroom.domain.biggoal.domain.Priority;
 import com.bloomgroom.domain.biggoal.domain.repository.BigGoalRepository;
 import com.bloomgroom.domain.biggoal.dto.request.BigGoalReq;
 import com.bloomgroom.domain.biggoal.dto.request.BigGoalUpdateReq;
+import com.bloomgroom.domain.smallgoal.domain.SmallGoal;
+import com.bloomgroom.domain.smallgoal.domain.repository.SmallGoalRepository;
 import com.bloomgroom.domain.user.domain.User;
 import com.bloomgroom.domain.user.domain.repository.UserRepository;
 import com.bloomgroom.global.payload.ErrorCode;
@@ -22,7 +24,7 @@ public class BigGoalService {
 
     private final BigGoalRepository bigGoalRepository;
     private final UserRepository userRepository;
-//    private final SubGoalRepository subGoalRepository;
+    private final SmallGoalRepository smallGoalRepository;
 
     //1. 장기목표 생성
     public BigGoal createBigGoal(BigGoalReq bigGoalReq) {
@@ -64,8 +66,8 @@ public class BigGoalService {
     //해당 메서드는 세부 사항이 업데이트 될때 실행됨
 
     //달성률 계산 = 장기 목표별 달성된 세부목표 수 / 총 세부목표 수
-    
-    
+
+
     //2-2) 장기목표 삭제
     public void deleteBigGoal(Long bigGoalId) {
 
@@ -75,7 +77,12 @@ public class BigGoalService {
         }
 
         BigGoal bigGoal = bigGoalOptional.get();
-        bigGoalRepository.delete(bigGoal); // 장기 목표 및 해당 세부 목표들 삭제
+
+        List<SmallGoal> smallGoals = smallGoalRepository.findByBigGoal(bigGoal);
+
+        smallGoalRepository.deleteAll(smallGoals);
+
+        bigGoalRepository.delete(bigGoal);
     }
 
     //3. 장기목표 수정
@@ -105,6 +112,7 @@ public class BigGoalService {
     }
 
     //4.장기목표 리스트 (우선순위 순으로)
+    //장기목표설정이후에서 사용하면 됨!
     public List<BigGoal> getBigGoalsSorted() {
         return bigGoalRepository.findAllByOrderByPriority();
     }
