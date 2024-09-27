@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/ubuntu/app
+  - source: build/libs/your-application.jar
+    destination: /home/ubuntu/app/
     overwrite: yes
 
 hooks:
@@ -14,3 +14,4 @@ hooks:
     - location: scripts/start.sh
       timeout: 60
       runas: ubuntu
+
