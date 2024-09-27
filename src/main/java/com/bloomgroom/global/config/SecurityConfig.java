@@ -27,11 +27,11 @@ public class SecurityConfig {
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .headers(headerConfig -> headerConfig.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        // Swagger 경로 허용
                         .requestMatchers(URL_TO_PERMIT).permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Swagger 경로 추가
                         .anyRequest().authenticated()
-
                 )
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(withDefaults());
 
