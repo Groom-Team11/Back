@@ -1,0 +1,37 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 7438421e5d8a354ef8203fc06284f1da
+            client-secret: DNH6uwsBs6UGP0j8WtLA53c3tdaH48KZ
+#            redirect-uri: http://localhost:8080/oauth2/callback/kakao
+            redirect-uri: http://3.36.171.123/oauth2/callback/kakao
+            authorization-grant-type: authorization_code
+            client-name: Kakao
+
+
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+kakao:
+  admin-key: e537a1f9a650bbb0f9abaeee74e694ba
+
+jwt:
+  secret-key: B1B8778C49CAAA7AB9E426C55C5AB
+
+#app
+app:
+  auth:
+    tokenSecret: a4878c8a852bddda32b58fb7e49997302b1539c29215682cc7f971ab62d92bd1f624d60f10989fce2989e1ff094ff3736329b133a4aa3acf96f81f3b1f3af2b4
+    tokenExpirationMsec: 3600000
+    refreshTokenExpirationMsec: 1209600000
+    kakao:
+      userInfoUri: https://kapi.kakao.com/v2/user/me
+  cors:
+    allowed-origins: http://localhost:3000, http://localhost:8080
