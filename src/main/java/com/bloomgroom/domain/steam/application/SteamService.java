@@ -5,7 +5,9 @@ import com.bloomgroom.domain.biggoal.domain.repository.BigGoalRepository;
 import com.bloomgroom.domain.steam.domain.Steam;
 import com.bloomgroom.domain.steam.domain.repository.SteamRepository;
 import com.bloomgroom.domain.steam.dto.response.SteamRes;
+import com.bloomgroom.global.payload.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +23,7 @@ public class SteamService {
     private final BigGoalRepository bigGoalRepository;
 
     @Transactional
-    public SteamRes createSteam(Long bigGoalId) {
+    public ResponseEntity<ApiResponse> createSteam(Long bigGoalId) {
         // BigGoal 엔티티 조회
         BigGoal bigGoal = bigGoalRepository.findById(bigGoalId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 ID의 장기목표가 존재하지 않습니다: " + bigGoalId));
@@ -44,16 +46,18 @@ public class SteamService {
         bigGoal.setCnt(bigGoal.getCnt() + 1); // cnt가 null일 때 예외 방지
         bigGoalRepository.save(bigGoal);
 
-        return new SteamRes(savedSteam);
+        return ResponseEntity.ok(ApiResponse.toApiResponse(new SteamRes(savedSteam))); // 수증기 생성 결과 반환
     }
 
-    public List<SteamRes> getSteamList(Long bigGoalId) {
+    public ResponseEntity<ApiResponse> getSteamList(Long bigGoalId) {
         BigGoal bigGoal = bigGoalRepository.findById(bigGoalId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 ID의 장기목표가 존재하지 않습니다: " + bigGoalId));
 
         List<Steam> steamList = steamRepository.findByBigGoal(bigGoal);
-        return steamList.stream()
+        List<SteamRes> steamResponses = steamList.stream()
                 .map(SteamRes::new)
                 .collect(Collectors.toList());
+
+        return ResponseEntity.ok(ApiResponse.toApiResponse(steamResponses)); // 수증기 리스트 반환
     }
 }
