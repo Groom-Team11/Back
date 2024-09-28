@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateSmallGoalReq {
-    private String content;    // 수정할 세부 목표 내용
     private Boolean goalStatus; // 수정할 목표 상태
+    private String content; // 수정할 목표 내용
     private LocalDateTime smallGoalDate;
 }
+
