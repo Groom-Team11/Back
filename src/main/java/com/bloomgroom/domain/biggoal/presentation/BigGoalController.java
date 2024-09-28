@@ -55,7 +55,8 @@ public class BigGoalController {
     //2. 달성된 장기 목표 삭제
     @DeleteMapping("/{id}")
     @Operation(summary = "장기목표 삭제", description = "장기목표 삭제 API")
-    public ResponseEntity<ApiResponse> deleteBigGoal(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteBigGoal(@PathVariable Long id,
+                                                     @AuthenticationPrincipal CustomUserDetails userDetails) {
         try {
             // 인증된 유저 확인
             if (userDetails == null || userDetails.getUser() == null) {
@@ -136,7 +137,6 @@ public class BigGoalController {
             return ResponseEntity.internalServerError()
                     .body(ApiResponse.toApiResponse(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage())));
         }
-
     }
 
 }
