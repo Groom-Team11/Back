@@ -77,16 +77,22 @@ public class FlowerDictionaryService {
 
     @Transactional
     public void createDictionary(User user) {
+        // 모든 꽃 조회
         List<Flower> flowers = flowerRepository.findAll();
+
+        // 꽃 도감 객체 생성
         List<FlowerDictionary> flowerDictionaries = new ArrayList<>();
-        flowers.forEach(flower -> {
+
+        for (Flower flower : flowers) {
             FlowerDictionary flowerDictionary = FlowerDictionary.builder()
                     .user(user)
                     .flower(flower)
                     .isAcquired(false)
                     .build();
             flowerDictionaries.add(flowerDictionary);
-        });
+        }
+
+        // FlowerDictionary 목록을 저장
         flowerDictionaryRepository.saveAll(flowerDictionaries);
     }
 }
