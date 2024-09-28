@@ -36,7 +36,7 @@ public class UserController {
     private final FlowerDictionaryService flowerDictionaryService;
     private final FlowerDictionaryRepository flowerDictionaryRepository;
 
-
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Authorization")
 //    @GetMapping("/oauth2/callback/kakao")
     @GetMapping("/login")
     @Operation(summary = "회원가입 및 로그인", description = "유저의 정보가 있을 시 회원가입, 없을 시 로그인을 실시하는 API")

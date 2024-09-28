@@ -16,6 +16,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Collections;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -49,12 +51,16 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://3.36.171.123:8080");
+        configuration.addAllowedOrigin("http://3.36.171.123:3000");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
 
+        // 노출할 헤더 추가
+        configuration.setExposedHeaders(Collections.singletonList("Authorization")); // Authorization 헤더 노출
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); //모든 경로에 CORS 적용
+        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 CORS 적용
         return source;
     }
 
