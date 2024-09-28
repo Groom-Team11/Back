@@ -129,7 +129,7 @@ public class BigGoalService {
 
 
         // cnt가 0보다 큰 경우에만 달성률 계산
-        if (totalDays > 0) {
+        if (totalDays >= 0) {
             // cnt / (endDate - startDate)
             double achievementRate = ((double) bigGoal.getCnt() / totalDays) * 100;
             return (int) achievementRate;
