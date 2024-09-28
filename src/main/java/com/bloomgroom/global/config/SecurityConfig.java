@@ -40,13 +40,16 @@ public class SecurityConfig {
 
     private static final String[] URL_TO_PERMIT = {
             "/oauth2/**",
-            "/api/v1/**"
+            "/api/v1/**",
+            "/v3/api-docs/**",        // Swagger OpenAPI docs
+            "/swagger-ui/**"          // Swagger UI resources
     };
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOriginPattern("*"); // 모든 출처 허용 (개발용)
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
