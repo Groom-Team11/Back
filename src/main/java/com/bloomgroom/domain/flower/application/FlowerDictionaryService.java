@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -77,13 +78,15 @@ public class FlowerDictionaryService {
     @Transactional
     public void createDictionary(User user) {
         List<Flower> flowers = flowerRepository.findAll();
+        List<FlowerDictionary> flowerDictionaries = new ArrayList<>();
         flowers.forEach(flower -> {
             FlowerDictionary flowerDictionary = FlowerDictionary.builder()
                     .user(user)
                     .flower(flower)
                     .isAcquired(false)
                     .build();
-            flowerDictionaryRepository.save(flowerDictionary);
+            flowerDictionaries.add(flowerDictionary);
         });
+        flowerDictionaryRepository.saveAll(flowerDictionaries);
     }
 }
