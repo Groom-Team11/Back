@@ -1,6 +1,7 @@
 package com.bloomgroom.domain.smallgoal.domain;
 
 import com.bloomgroom.domain.biggoal.domain.BigGoal;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 
@@ -21,6 +22,7 @@ public class SmallGoal {
 
     @ManyToOne
     @JoinColumn(name = "bigGoal_id", nullable = false)
+    @JsonIgnore // 직렬화에서 제외하여 순환 참조 문제 방지
     private BigGoal bigGoal;
 
     private String content;
