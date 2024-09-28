@@ -74,6 +74,7 @@ public class FlowerDictionaryService {
 
     }
 
+    @Transactional
     public void createDictionary(User user) {
         List<Flower> flowers = flowerRepository.findAll();
         flowers.forEach(flower -> {
