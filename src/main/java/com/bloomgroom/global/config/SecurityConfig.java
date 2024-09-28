@@ -40,7 +40,7 @@ public class SecurityConfig {
     }
 
     private static final String[] URL_TO_PERMIT = {
-            "/oauth2/**",
+            "/login/**",
             "/api/v1/**"
     };
 

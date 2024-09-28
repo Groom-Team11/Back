@@ -19,10 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.bloomgroom.global.payload.ApiResponse;
 import org.springframework.http.HttpHeaders;
 
@@ -40,7 +37,8 @@ public class UserController {
     private final FlowerDictionaryRepository flowerDictionaryRepository;
 
 
-    @GetMapping("/oauth2/callback/kakao")
+//    @GetMapping("/oauth2/callback/kakao")
+    @GetMapping("/login")
     @Operation(summary = "회원가입 및 로그인", description = "유저의 정보가 있을 시 회원가입, 없을 시 로그인을 실시하는 API")
     public ResponseEntity<ApiResponse> kakaoLogin(@RequestParam(name = "code") String code) {
 
@@ -86,6 +84,8 @@ public class UserController {
             // HttpHeaders에 Access Token 추가
             HttpHeaders  headers = new HttpHeaders();
             headers.add("Authorization", "Bearer " + newAccessToken);
+            System.out.println("헤더에 넣을 access token= " + newAccessToken);
+
 
             // 성공 응답 객체 생성
             ApiResponse response = ApiResponse.builder()
