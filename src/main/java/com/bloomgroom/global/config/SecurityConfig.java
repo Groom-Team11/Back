@@ -8,7 +8,10 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+<<<<<<< HEAD
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+=======
+>>>>>>> 010a73bfa76702b0acb9aa3f59f65056d94e7f67
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,6 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+<<<<<<< HEAD
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headerConfig -> headerConfig.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
@@ -33,6 +37,16 @@ public class SecurityConfig {
                         .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll() // Swagger 경로 추가
                         .anyRequest().authenticated()
                 )
+=======
+                .csrf(csrfConfig -> csrfConfig.disable())
+                .headers(headerConfig -> headerConfig.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(URL_TO_PERMIT).permitAll()
+                        .anyRequest().authenticated()
+
+                )
+
+>>>>>>> 010a73bfa76702b0acb9aa3f59f65056d94e7f67
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(withDefaults());
 
@@ -48,7 +62,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000");
+<<<<<<< HEAD
         configuration.addAllowedOrigin("http://3.36.171.123:8080");
+=======
+>>>>>>> 010a73bfa76702b0acb9aa3f59f65056d94e7f67
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BigGoalReq {
+
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Priority priority;

@@ -21,8 +21,10 @@ public enum ErrorCode {
     NOT_FOUND(HttpStatus.NOT_FOUND, "E4", "존재하지 않는 엔티티입니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "E5", "사용자를 찾을 수 없습니다."),
     VERY_IMPORTANT_GOAL_EXISTS(HttpStatus.BAD_REQUEST, "E6", "해당 사용자는 이미 '매우중요' 목표를 가지고 있습니다."),
+
     IMPORTANT_GOAL_EXISTS(HttpStatus.BAD_REQUEST, "E7", "해당 사용자는 이미 '중요' 목표를 가지고 있습니다."),
     UNAUTHORIZED_USER(HttpStatus.UNAUTHORIZED, "E8", "인증되지 않은 사용자입니다.");
+
 
 
     private final String message;

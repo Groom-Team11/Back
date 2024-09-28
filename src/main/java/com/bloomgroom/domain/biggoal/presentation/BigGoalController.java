@@ -136,10 +136,7 @@ public class BigGoalController {
             return ResponseEntity.internalServerError()
                     .body(ApiResponse.toApiResponse(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage())));
         }
-        
-        // 주석
+
     }
-
-
 
 }

@@ -73,7 +73,10 @@ public class SmallGoalService {
 
     // 날짜로 세부 목표 조회
     public ResponseEntity<ApiResponse> getSmallGoalsByDate(Long bigGoalId, LocalDateTime smallGoalDate) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 010a73bfa76702b0acb9aa3f59f65056d94e7f67
         BigGoal bigGoal = bigGoalRepository.findById(bigGoalId)
                 .orElseThrow(() -> new RuntimeException("장기 목표를 찾을 수 없습니다."));
 
@@ -81,9 +84,13 @@ public class SmallGoalService {
                 .filter(goal -> goal.getSmallGoalDate().toLocalDate().isEqual(smallGoalDate.toLocalDate())) // 날짜 비교
                 .collect(Collectors.toList());
 
+<<<<<<< HEAD
         // 개수를 포함한 ApiResponse 생성
         ApiResponse response = ApiResponse.toApiResponseWithCount(smallGoals);
 
+=======
+        ApiResponse response = ApiResponse.toApiResponse(smallGoals);
+>>>>>>> 010a73bfa76702b0acb9aa3f59f65056d94e7f67
         return ResponseEntity.ok(response);
     }
 }
