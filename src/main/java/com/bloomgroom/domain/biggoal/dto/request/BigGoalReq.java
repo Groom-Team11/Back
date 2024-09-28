@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Setter
 public class BigGoalReq {
 
-    private Long userId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Priority priority;
