@@ -41,6 +41,7 @@ public class BigGoalController {
     
     //2. 달성된 장기 목표 삭제
     @DeleteMapping("/{id}")
+    @Operation(summary = "장기목표 삭제", description = "장기목표 삭제 API")
     public ResponseEntity<ApiResponse> deleteBigGoal(@PathVariable Long id) {
         try {
             bigGoalService.deleteBigGoal(id);
