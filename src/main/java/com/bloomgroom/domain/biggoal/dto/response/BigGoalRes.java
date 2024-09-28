@@ -17,6 +17,5 @@ public class BigGoalRes {
     private Priority priority;
     private String content;
     private Boolean goalStatus;
-    private int achievementRate;
 
 }
