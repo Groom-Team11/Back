@@ -1,5 +1,8 @@
 package com.bloomgroom.domain.user.presentation;
 
+import com.bloomgroom.domain.flower.application.FlowerDictionaryService;
+import com.bloomgroom.domain.flower.domain.FlowerDictionary;
+import com.bloomgroom.domain.flower.domain.repository.FlowerDictionaryRepository;
 import com.bloomgroom.domain.user.application.TokenService;
 import com.bloomgroom.domain.user.domain.User;
 import com.bloomgroom.domain.user.application.UserService;
@@ -32,6 +35,8 @@ public class UserController {
 
     private final UserService userService;
     private final TokenService tokenService;
+    private final FlowerDictionaryService flowerDictionaryService;
+    private final FlowerDictionaryRepository flowerDictionaryRepository;
 
 
     @GetMapping("/oauth2/callback/kakao")
@@ -52,6 +57,7 @@ public class UserController {
             user = userService.signup(kakaoUser);
             String refreshToken = tokenService.createRefreshToken(user);
             tokenService.saveRefreshToken(user, refreshToken); // DB에 RefreshToken 저장
+            flowerDictionaryService.createDictionary(user); // 유저의 꽃 도감 생성
 
             // 성공 응답
             ApiResponse response = ApiResponse.builder()
