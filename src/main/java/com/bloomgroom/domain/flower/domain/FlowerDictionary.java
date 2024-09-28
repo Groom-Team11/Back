@@ -34,4 +34,8 @@ public class FlowerDictionary {
         this.flower = flower;
         this.isAcquired = isAcquired;
     }
+
+    public void setIsAcquired(boolean b) {
+        this.isAcquired = b;
+    }
 }
