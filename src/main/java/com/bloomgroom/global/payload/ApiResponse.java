@@ -20,6 +20,8 @@ public class ApiResponse {
     @Schema(type = "object", example = "information", description = "restful의 정보를 감싸 표현합니다. object형식으로 표현합니다.")
     private Object information;
 
+
+
     public ApiResponse() {}
 
     @Builder
@@ -46,4 +48,20 @@ public class ApiResponse {
                 .information(responseData)
                 .build();
     }
+
+    // Token을 포함한 ApiResponse 생성
+    public static ApiResponse toApiResponseWithTokens(Object information, String accessToken, String refreshToken) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("information", information);
+        responseData.put("accessToken", accessToken);
+        responseData.put("refreshToken", refreshToken);
+
+        return ApiResponse.builder()
+                .check(true)
+                .information(responseData) // Token을 포함한 정보
+                .build();
+    }
+
+
+
 }
