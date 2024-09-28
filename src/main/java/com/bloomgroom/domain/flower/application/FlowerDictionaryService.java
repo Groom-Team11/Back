@@ -47,6 +47,7 @@ public class FlowerDictionaryService {
         return ResponseEntity.ok(apiResponse);
     }
 
+    @Transactional
     public ResponseEntity<?> getRandomFlower(User user) {
 
         // 사용자의 꽃 도감 조회
