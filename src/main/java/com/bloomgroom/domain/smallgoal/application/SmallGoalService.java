@@ -6,6 +6,7 @@ import com.bloomgroom.domain.smallgoal.domain.SmallGoal;
 import com.bloomgroom.domain.smallgoal.domain.repository.SmallGoalRepository;
 import com.bloomgroom.domain.smallgoal.dto.request.CreateSmallGoalReq;
 import com.bloomgroom.domain.smallgoal.dto.request.UpdateSmallGoalReq;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,18 +51,26 @@ public class SmallGoalService {
     }
 
     // 세부 목표 수정
+    @Transactional
     public ResponseEntity<ApiResponse> updateSmallGoal(Long smallGoalId, UpdateSmallGoalReq request) {
         SmallGoal smallGoal = smallGoalRepository.findById(smallGoalId)
                 .orElseThrow(() -> new RuntimeException("세부 목표를 찾을 수 없습니다."));
 
-        smallGoal.setContent(request.getContent());
-        smallGoal.setGoalStatus(request.getGoalStatus());
+
+        // goalStatus만 업데이트
+        if (request.getGoalStatus() != null) {
+            smallGoal.updateGoalStatus(request.getGoalStatus());
+            System.out.println("Updated goalStatus = " + smallGoal.getGoalStatus());
+        }
+
         smallGoal = smallGoalRepository.save(smallGoal);
 
         ApiResponse response = ApiResponse.toApiResponse(smallGoal);
 
         return ResponseEntity.ok(response);
     }
+
+
 
     // 세부 목표 삭제
     public ResponseEntity<ApiResponse> deleteSmallGoal(Long smallGoalId) {

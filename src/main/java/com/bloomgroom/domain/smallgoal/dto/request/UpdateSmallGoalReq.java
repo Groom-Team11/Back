@@ -11,7 +11,5 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UpdateSmallGoalReq {
     private Boolean goalStatus; // 수정할 목표 상태
-    private String content; // 수정할 목표 내용
-    private LocalDateTime smallGoalDate;
 }
 
