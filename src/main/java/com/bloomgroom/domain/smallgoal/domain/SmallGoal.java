@@ -35,4 +35,8 @@ public class SmallGoal {
     protected void onCreate() {
         this.smallGoalDate = LocalDateTime.now(); // 현재 날짜와 시간으로 설정
     }
+
+    public void updateGoalStatus(Boolean goalStatus) {
+        this.goalStatus = goalStatus;
+    }
 }
